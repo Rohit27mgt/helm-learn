@@ -1,0 +1,25 @@
+Namespace: learn
+
+Environment: int
+
+ReplicaCount: 1
+
+Service:
+  name: learn-svc
+  port: 80
+  targetPort: 8000
+  nodePort: 32002
+  image: rohit273/learn-ed-app
+  tag: latest
+
+  type: NodePort
+
+Ingress:
+  enabled: true
+  host: localhost
+  nginxIngressController:
+    enabled: true
+    class: nginx
+
+Host: learn.app
+

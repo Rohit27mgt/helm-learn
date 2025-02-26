@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: learn-deploy
+  namespace: {{ .Values.Namespace }}
+spec:
+  replicas: {{ .Values.ReplicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: learn-deploy
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: learn-deploy
+    spec:
+      containers:
+        - name: learn-svc
+          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.Service.image }}:{{ .Values.Service.tag }}"
+          ports:
+            - containerPort: {{ .Values.Service.port }}
